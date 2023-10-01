@@ -111,6 +111,14 @@ body {
   color: var(--white);
 }
 
+#directions-panel {
+  background-color: white;
+  direction: ltr;
+  height: 500px;
+  overflow-y: auto;
+  margin: 2% 0 2% 0px;
+}
+
 .commutes-info {
   flex: 0 0 110px;
   max-width: 100%;

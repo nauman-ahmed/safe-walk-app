@@ -4,7 +4,10 @@ import Map from './Components/Map/Map';
 import { useEffect, useState } from 'react';
 import AutoComplete from './Components/AutoComplete/AutoComplete';
 import { LoadScript, DirectionsService } from '@react-google-maps/api';
-
+import { registerUser, loginUser, UpdateUser, createTrip } from "./API/api"
+import { setAuthToken } from "./API/setCommonHeader"
+import { getAddressFromLatLong } from "./userServices/service"
+import { decodeToken } from "react-jwt";
 
 function App() {
 
@@ -19,13 +22,73 @@ function App() {
   const [addAddress, setAddAddress] = useState(false);
   const [destinationAddress, setDestination] = useState('');
   const [addressToState, setAddressToState] = useState(false);
+  const [sourceAddress, setSourceAddress] = useState("");
+  const [destinationTrips, setDestinationTrips] = useState([]);
+  
+  const checkAuth = async () => {
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
+
+    if(flag){
+      const add = await getAddressFromLatLong(originLatLng.lat,originLatLng.lng)
+      setSourceAddress(add)
+      setAuthToken(localStorage.getItem("authorization"))
+    }
+
+  }
+
+  useEffect(()=>{
+    if(originLatLng.lat){
+      checkAuth()
+    }
+  },[originLatLng,addAddress])
 
   useEffect(() => {
 
+    // registerUser({
+    //   email:"naumanahmed449@gmail.com",
+    //   password:"nauman123",
+    //   firstName:"Nauman",
+    //   lastName:"Ahmed"
+    // }).then((res)=>{
+    //   if(res == "Successfully created"){
+    //     console.log("Successfully created")
+    //   }else{
+    //     console.log("ERROR")
+    //   }
+    // })
+
+    loginUser({
+      email:"naumanahmed449@gmail.com",
+      password:"nauman123",
+    }).then((res)=>{
+      if(res.message == "Successfully Login"){
+        console.log("Successfully Login")
+        localStorage.setItem("authorization",res.token!==undefined?res.token:"")
+        setAuthToken(res.token)
+      }else{
+        console.log("ERROR")
+      }
+      
+    })
+
+    // UpdateUser({
+    //     email:"naumanahmed449@gmail.com",
+    //     password:"nauman123",
+    //     firstName:"Ahmed",
+    //     lastName:"Nauman"
+    // }).then((res)=>{
+    //   if(res == "successfully Updated"){
+    //     console.log("SUCCESSFULLY REGISTERED",res)
+    //   }else{
+    //     console.log("ERROR")
+    //   }
+    // })
+
+
     navigator.geolocation.getCurrentPosition(
       position => {
-        console.log("Latitude: ", position.coords.latitude);
-        console.log("Longitude: ", position.coords.longitude);
+        
         setOriginLatLng({ lat: position.coords.latitude, lng: position.coords.longitude })
 
         // myLocation = { lat: position.coords.latitude, lng: position.coords.longitude }
@@ -36,6 +99,12 @@ function App() {
     );
     // CrimeMeter()
   }, []);
+
+  useEffect(()=>{
+    if(addressToState){
+      handleCalculateDistance()
+    }
+  },[addressToState])
 
   const handleSubmit = () => {
     localStorage.setItem("contactName", name);
@@ -57,17 +126,32 @@ function App() {
     setDestinationLatLng({ lat, lng });
   }
 
-  useEffect(() => {
-    console.log(addresses, '  address to show');
-  }, [addresses])
+  // useEffect(() => {
+  //   console.log(addresses, '  address to show');
+  // }, [addresses])
 
   const [distance, setDistance] = useState('');
   const [directionToRoute, setDirectionToRoute] = useState(null);
+
+  const destinationTripsHandler = async (lat,lng) => {
+    const add = await getAddressFromLatLong(lat,lng)
+    if (isEdit) {
+      let temp = [...destinationTrips]
+      temp.splice(selectedItem,1,add)
+      setDestinationTrips(temp)
+      console.log("Address: Nauman isEdit ", temp);
+    }else{
+      setDestinationTrips([...destinationTrips,add])
+      console.log("Address: Nauman Else ", destinationTrips);
+    }
+  }
 
   const handleCalculateDistance = () => {
     const origin = new window.google.maps.LatLng(originLatLng.lat, originLatLng.lng); // Replace with actual origin latlng
     const destination = new window.google.maps.LatLng(destinationLatLng.lat, destinationLatLng.lng); // Replace with actual destination latlng
 
+    destinationTripsHandler(destinationLatLng.lat, destinationLatLng.lng)
+    
     const service = new window.google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       {
@@ -126,7 +210,6 @@ function App() {
       (result, status) => {
         if (status === 'OK') {
           directionsRenderer.setDirections(result);
-          console.log(result, '   direction result');
           myRoute = result;
         } else {
           console.error('Directions request failed:', status);
@@ -144,11 +227,23 @@ function App() {
   const [isEdit, setEdit] = useState(false);
 
   const handleDeleteItem = () => {
+    
+    let temp = [...destinationTrips]
+    temp.splice(selectedItem,1)
+    setDestinationTrips(temp)
+
     const arr = addresses;
     arr.splice(selectedItem, 1);
     setAddressess(arr);
     setAddAddress(false);
     setEmpty(false)
+  }
+
+  const tripsDestinationHandler = () => {
+    let storageData = localStorage.getItem("authorization")
+    let details = decodeToken(storageData)
+    createTrip({details,sourceAddress, destinationTrips})
+    console.log("tripsDestinationHandler",sourceAddress,destinationTrips)
   }
 
   return (
@@ -164,7 +259,6 @@ function App() {
           </defs>
           <use href="#commutes-add-icon" />
         </svg>
-        {addressToState && handleCalculateDistance()}
         <main className="commutes">
 
           <div className="contacts">
@@ -192,11 +286,22 @@ function App() {
               <button type="button" onClick={() => handleSubmit()} className="btn btn-primary submit">  submit</button>
             </form>
           </div>
-
-          <div style={{ height: '70vh', width: '100%' }}>
-            <Map myLocation={originLatLng} addresses={addresses} selectedItem={selectedItem} handleSelectItem={(i) => handleSelectItem(i)} />
+          <div style={{ position: "relative", display:"flex" }}>
+            <div style={addresses.length > 0 ? { width: '60%' } : { width: '100%' }}>
+              <Map myLocation={originLatLng} addresses={addresses} selectedItem={selectedItem} handleSelectItem={(i) => handleSelectItem(i)} />
+            </div>
+            <div style={addresses.length > 0 ? { width: '40%',position: "relative" } : { display: 'none',position: "relative" }}>
+              <div id="directions-panel"></div>
+              <div style={{ display:"flex", width: "100%", justifyContent: "space-evenly" }}>
+                <button className="add-button" onClick={tripsDestinationHandler}>
+                End
+                </button>
+                <button className="add-button">
+                  Contact
+                </button>
+              </div>
+            </div>
           </div>
-          <div id="directions-panel"></div>
           <div className="commutes-info">
             <div className="commutes-initial-state" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
               <div className="description">
@@ -222,6 +327,7 @@ function App() {
                   {addresses.map((item, i) => {
                     return (
                       <div className={`destination ${selectedItem == i ? 'active' : ''}`} onClick={() => handleSelectItem(i)} tabIndex={i} role="button">
+                        {console.log("ITEM",item)}
                         <div className="destination-content">
                           <div className="metadata">{item.distance}</div>
                           <div className="address">To <abbr title={item.destinationAddress}>{item.destinationAddress}</abbr></div>
@@ -294,6 +400,7 @@ function App() {
                 <button className={`delete-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => handleDeleteItem()} type="reset">Delete</button>
                 <button className="cancel-button mr-4" onClick={() => { setAddAddress(false); setEmpty(false) }} type="reset">Cancel</button>
 
+                
                 <button className={`add-destination-button ${isEdit ? 'hide' : ''}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">Add</button>
                 <button className={`edit-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">
                   Done
