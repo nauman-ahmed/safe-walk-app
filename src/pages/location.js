@@ -4,10 +4,11 @@ import Map from '../Components/Map/Map';
 import { useEffect, useState } from 'react';
 import AutoComplete from '../Components/AutoComplete/AutoComplete';
 import { LoadScript, DirectionsService } from '@react-google-maps/api';
-import { registerUser, loginUser, UpdateUser, createTrip } from "../API/api"
+import { registerUser, loginUser, UpdateUser, createTrip, sendText } from "../API/api"
 import { setAuthToken } from "../API/setCommonHeader"
 import { getAddressFromLatLong } from "../userServices/service"
 import { decodeToken } from "react-jwt";
+import { useNavigate } from "react-router-dom";
 
 function Location() {
 
@@ -24,6 +25,8 @@ function Location() {
   const [addressToState, setAddressToState] = useState(false);
   const [sourceAddress, setSourceAddress] = useState("");
   const [destinationTrips, setDestinationTrips] = useState([]);
+  
+  const navigate = useNavigate()
   
   const checkAuth = async () => {
     let flag = false;
@@ -58,19 +61,6 @@ function Location() {
     //   }
     // })
 
-    loginUser({
-      email:"naumanahmed449@gmail.com",
-      password:"nauman123",
-    }).then((res)=>{
-      if(res.message == "Successfully Login"){
-        console.log("Successfully Login")
-        localStorage.setItem("authorization",res.token!==undefined?res.token:"")
-        setAuthToken(res.token)
-      }else{
-        console.log("ERROR")
-      }
-      
-    })
 
     // UpdateUser({
     //     email:"naumanahmed449@gmail.com",
@@ -106,11 +96,20 @@ function Location() {
     }
   },[addressToState])
 
+  const sendtextHandler = () => {
+    const phoneNumber = localStorage.getItem("mobileNumber");
+    sendText({phoneNumber}).then((res)=> {
+      console.log(res)
+    })
+  }
+
   const handleSubmit = () => {
     localStorage.setItem("contactName", name);
     localStorage.setItem("mobileNumber", phoneNumber);
     setName('');
     setPhoneNumber('');
+    localStorage.removeItem("authorization")
+    navigate('/');
   }
 
   const handleAddAddressDialoge = () => {
@@ -296,7 +295,7 @@ function Location() {
                 <button className="add-button" onClick={tripsDestinationHandler}>
                 End
                 </button>
-                <button className="add-button">
+                <button className="add-button" onClick={sendtextHandler}>
                   Contact
                 </button>
               </div>
@@ -327,7 +326,6 @@ function Location() {
                   {addresses.map((item, i) => {
                     return (
                       <div className={`destination ${selectedItem == i ? 'active' : ''}`} onClick={() => handleSelectItem(i)} tabIndex={i} role="button">
-                        {console.log("ITEM",item)}
                         <div className="destination-content">
                           <div className="metadata">{item.distance}</div>
                           <div className="address">To <abbr title={item.destinationAddress}>{item.destinationAddress}</abbr></div>
