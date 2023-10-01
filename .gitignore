@@ -1,0 +1,38 @@
+# Node.js files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store
+
+# Log files
+*.log
+
+# Build files
+/build
+
+# Dependency directories
+/pnpm-debug.log
+/test-results
+/jest-coverage
+/.pnp
+.pnp.js
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+ehthumbs.db
+Thumbs.db
+
+# Customizable
+# .env                   # Include this if you use environment variables
+# .env.local             # Include this if you use a local environment file
