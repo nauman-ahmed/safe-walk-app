@@ -3,10 +3,23 @@ import Logo from './logo'; // Replace with the correct path to your Logo compone
 import MobileMenu from './mobile-menu'; // Replace with the correct path to your MobileMenu component
 import { Link } from 'react-router-dom'; // Use Link from react-router-dom for navigation
 import PreviousMap from 'postcss/lib/previous-map';
+import { setAuthToken } from "../../API/setCommonHeader"
 
 export default function Header(props) {
   const [top, setTop] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [auth, setAuth] = useState(false);
+
+  const checkAuth = async () => {
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
+
+    if(flag){
+      setAuth(true)
+      setAuthToken(localStorage.getItem("authorization"))
+    }
+
+  }
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -18,6 +31,7 @@ export default function Header(props) {
   };
 
   useEffect(() => {
+    checkAuth()
     scrollHandler();
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
@@ -41,22 +55,9 @@ export default function Header(props) {
           {/* Desktop navigation */}
           <nav className="hidden md:flex md:grow">
             {/* Desktop sign-in links */}
+              {auth ? 
             <ul className="flex grow justify-end flex-wrap items-center">
-              <li>
-                <Link
-                  to="/login"
-                  className="font-medium transition duration-300 focus:outline-none focus:text-yellow-500 focus:underline hover:underline hover:text-yellow-500 px-5 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Sign in
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup" className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">
-                  <span>Sign up</span>
-                </Link>
-              </li>
-              {/* Profile Avatar */}
-              <li className="relative ml-3 h-10">
+            <li className="relative ml-3 h-10">
                 <button
                   onClick={toggleDropdown}
                   className="focus:outline-none"
@@ -87,6 +88,14 @@ export default function Header(props) {
                           Trip History
                         </Link>
                       </li>
+                      {/* <li>
+                        <Link
+                          to="/map"
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                         Go to Map
+                        </Link>
+                      </li> */}
                       <li>
                         <Link
                           to="/settings"
@@ -100,6 +109,26 @@ export default function Header(props) {
                 )}
               </li>
             </ul>
+            :
+            <ul className="flex grow justify-end flex-wrap items-center">
+                <li>
+                <Link
+                  to="/login"
+                  className="font-medium transition duration-300 focus:outline-none focus:text-yellow-500 focus:underline hover:underline hover:text-yellow-500 px-5 py-3 flex items-center transition duration-150 ease-in-out"
+                >
+                  Sign in
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">
+                  <span>Sign up</span>
+                </Link>
+              </li>
+            </ul>
+          }
+              
+              {/* Profile Avatar */}
+              
           </nav>
 
           <MobileMenu />

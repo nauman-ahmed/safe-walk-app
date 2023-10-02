@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, MarkerF, PolylineF, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import { useState } from 'react';
 
@@ -90,6 +90,7 @@ const style = [
     },
 ];
 
+
 const Map = (props) => {
 
 
@@ -147,9 +148,14 @@ const Map = (props) => {
     };
 
 
-    // useEffect(()=>{
-    //     console.log("MAP",props)
-    // },[props])
+    const unSetRenderer = () => {
+    }
+
+    useEffect(()=>{
+        if(props.addresses.length == 0){
+            // directionsRendererRef.current.setDirections(null);
+        }
+    },[props])
 
     return (
         <GoogleMap mapContainerStyle={containerStyle} center={props.myLocation} zoom={10}
@@ -179,7 +185,8 @@ const Map = (props) => {
                         onClick={() => handleRouteClick(i)}
                     />
                 </div>
-            ))}
+                ))
+            }
         </GoogleMap>
     );
 };

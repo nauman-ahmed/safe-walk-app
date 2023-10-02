@@ -240,8 +240,12 @@ function Location() {
   const tripsDestinationHandler = () => {
     let storageData = localStorage.getItem("authorization")
     let details = decodeToken(storageData)
-    createTrip({details,sourceAddress, destinationTrips})
-    console.log("tripsDestinationHandler",sourceAddress,destinationTrips)
+    const directionsRenderer = new window.google.maps.DirectionsRenderer();
+    directionsRenderer.setDirections(null)
+    // createTrip({details,sourceAddress, destinationTrips})
+    setAddAddress(false)
+    setEmpty(false)
+    setAddressess([])
   }
 
   return (

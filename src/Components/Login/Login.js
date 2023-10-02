@@ -50,6 +50,7 @@ export default function Login(props) {
       email:loginState.email_address,
       password:loginState.password,
     }).then((res)=>{
+      console.log("CHE",res)
       if(res.message == "Successfully Login"){
         console.log("Successfully Login")
         localStorage.setItem("authorization",res.token!==undefined?res.token:"")
