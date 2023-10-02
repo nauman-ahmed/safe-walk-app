@@ -21,6 +21,7 @@ const AutoComplete = (props) => {
             const address = addressObject.address_components;
             if (address) {
 
+                console.log("onPlaceChanged",address,addressObject)
                 setCity(address[0].long_name);
                 setQuery(addressObject.formatted_address, '   data ');
                 props.handleSetAddress(address[0].long_name);
@@ -45,7 +46,6 @@ const AutoComplete = (props) => {
             });
         });
     };
-
 
     const autocompleteRef = React.useRef(null);
 
