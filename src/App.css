@@ -325,7 +325,7 @@ body {
   display: flex;
   fill: var(--black);
   flex: 1 1 0;
-  height: 72px;
+  /* height: 72px; */
   justify-content: space-between;
   margin-right: 8px;
   min-width: 256px;

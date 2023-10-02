@@ -330,7 +330,7 @@ function Location() {
                   <div className="label">add alternative address</div>
                 </button>
               </div>
-              <button
+              {/* <button
                 className="left-control"
                 data-direction="-1"
                 aria-label="Scroll left"
@@ -343,7 +343,7 @@ function Location() {
                 >
                   <use href="#commutes-chevron-left-icon" data-direction="-1" />
                 </svg>
-              </button>
+              </button> */}
               <button
                 className="right-control hide"
                 data-direction="1"
