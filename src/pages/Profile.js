@@ -3,9 +3,11 @@ import Footer from '../Components/ui/footer';
 import Header from '../Components/ui/header';
 import { getUser } from "../API/api"
 import { decodeToken } from "react-jwt";
+import { Link,useNavigate } from 'react-router-dom'; // Use Link from react-router-dom for navigation
 
 function Profile() {
 
+  const navigate = useNavigate()
   const [user, setUser] = useState(null)
 
   useEffect(()=>{
@@ -15,6 +17,10 @@ function Profile() {
       setUser(res)
     })
   },[])
+
+  if(!localStorage.getItem("authorization")){
+    return navigate('/');
+  }
 
   return (
     <div

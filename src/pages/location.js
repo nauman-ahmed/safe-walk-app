@@ -13,6 +13,7 @@ import  Header from "../Components/ui/map"
 
 function Location() {
 
+  const navigate = useNavigate()
   const [originLatLng, setOriginLatLng] = useState({ lat: 0, lng: 0 });
   let myRoute = null;
   const [name, setName] = useState();
@@ -36,6 +37,8 @@ function Location() {
       const add = await getAddressFromLatLong(originLatLng.lat,originLatLng.lng)
       setSourceAddress(add)
       setAuthToken(localStorage.getItem("authorization"))
+    }else{
+      navigate('/');
     }
 
   }
@@ -75,24 +78,39 @@ function Location() {
     //   }
     // })
 
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
 
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        
-        setOriginLatLng({ lat: position.coords.latitude, lng: position.coords.longitude })
+    if(flag){
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          
+          setOriginLatLng({ lat: position.coords.latitude, lng: position.coords.longitude })
+  
+          // myLocation = { lat: position.coords.latitude, lng: position.coords.longitude }
+        },
+        error => {
+          console.error("Error getting location: ", error);
+        }
+      );
+    }else{
+      navigate('/');
+    }
 
-        // myLocation = { lat: position.coords.latitude, lng: position.coords.longitude }
-      },
-      error => {
-        console.error("Error getting location: ", error);
-      }
-    );
+    
     // CrimeMeter()
   }, []);
 
   useEffect(()=>{
-    if(addressToState){
-      handleCalculateDistance()
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
+
+    if(flag){
+      if(addressToState){
+        handleCalculateDistance()
+      }
+    }else{
+      navigate('/');
     }
   },[addressToState])
 
@@ -248,81 +266,51 @@ function Location() {
     setAddressess([])
   }
 
-  return (
-    <LoadScript googleMapsApiKey="AIzaSyB5uijdNdiYHE6vfZO_aFNb-Lq_pjZxMVA" libraries={["places"]}>
-
-      <div className="App"> 
-        {/* <svg className="hide">
-          <defs>
-            <symbol id="commutes-add-icon">
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-            </symbol>
-          </defs>
-          <use href="#commutes-add-icon" />
-        </svg> */}
-        <main className="commutes">
-          <Header/>
-          <div style={{ position: "relative", display:"flex" }}>
-            <div style={addresses.length > 0 ? { width: '60%' } : { width: '100%' }}>
-              <Map myLocation={originLatLng} addresses={addresses} selectedItem={selectedItem} handleSelectItem={(i) => handleSelectItem(i)} />
-            </div>
-            <div style={addresses.length > 0 ? { width: '40%',position: "relative" } : { display: 'none',position: "relative" }}>
-              <div id="directions-panel"></div>
-              <div style={{ display:"flex", width: "100%", justifyContent: "space-evenly" }}>
-                <button                  
-                  className="py-2 px-5 bg-red-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
-                  onClick={tripsDestinationHandler}>
-                End
-                </button>
-                <button 
-                  className="py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
-                  onClick={sendtextHandler}>
-                  Contact
-                </button>
+  if(!localStorage.getItem("authorization")){
+    return navigate('/');
+  }else{
+    return (
+      <LoadScript googleMapsApiKey="AIzaSyB5uijdNdiYHE6vfZO_aFNb-Lq_pjZxMVA" libraries={["places"]}>
+  
+        <div className="App"> 
+          {/* <svg className="hide">
+            <defs>
+              <symbol id="commutes-add-icon">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+              </symbol>
+            </defs>
+            <use href="#commutes-add-icon" />
+          </svg> */}
+          <main className="commutes">
+            <Header/>
+            <div style={{ position: "relative", display:"flex" }}>
+              <div style={addresses.length > 0 ? { width: '60%' } : { width: '100%' }}>
+                <Map myLocation={originLatLng} addresses={addresses} selectedItem={selectedItem} handleSelectItem={(i) => handleSelectItem(i)} />
               </div>
-            </div>
-          </div>
-          <div className="commutes-info">
-            <div className="commutes-initial-state" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
-              <div className="description">
-                <h1 className="heading">find your safe walk home</h1>
-                <p>see travel time, directions, and zones to avoid</p>
-              </div>
-              <button className="add-button" onClick={() => handleAddAddressDialoge()}>
-                <svg
-                  aria-label="Add Icon"
-                  width="24px"
-                  height="24px"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#commutes-add-icon" />
-                </svg>
-                <span className="label">home</span>
-              </button>
-            </div>
-
-            <div className="commutes-destinations" style={{ display: `${addresses.length > 0 ? 'flex' : 'none'}` }}>
-              <div className="destinations-container">
-                <div className="destination-list">
-                  {addresses.map((item, i) => {
-                    return (
-                      <div className={`destination ${selectedItem == i ? 'active' : ''}`} onClick={() => handleSelectItem(i)} tabIndex={i} role="button">
-                        <div className="destination-content">
-                          <div className="metadata">{item.distance}</div>
-                          <div className="address">To <abbr title={item.destinationAddress}>{item.destinationAddress}</abbr></div>
-                          <div className="destination-eta">{item.duration}</div>
-                        </div>
-                        <div className="destination-controls">
-                          <button onClick={() => { handleSelectItem(i); handleAddAddressDialoge(); setEdit(true); }} className="edit-button" aria-label="Edit Destination">
-                            Edit
-                          </button>
-                        </div>
-                      </div>
-                    )
-                  })}
+              <div style={addresses.length > 0 ? { width: '40%',position: "relative" } : { display: 'none',position: "relative" }}>
+                <div id="directions-panel"></div>
+                <div style={{ display:"flex", width: "100%", justifyContent: "space-evenly" }}>
+                  <button                  
+                    className="py-2 px-5 bg-red-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
+                    onClick={tripsDestinationHandler}>
+                  End
+                  </button>
+                  <button 
+                    className="py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
+                    onClick={sendtextHandler}>
+                    Contact
+                  </button>
                 </div>
-                <button onClick={() => handleAddAddressDialoge()} className="add-button">
+              </div>
+            </div>
+            <div className="commutes-info">
+              <div className="commutes-initial-state" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
+                <div className="description">
+                  <h1 className="heading">find your safe walk home</h1>
+                  <p>see travel time, directions, and zones to avoid</p>
+                </div>
+                <button className="add-button" onClick={() => handleAddAddressDialoge()}>
                   <svg
                     aria-label="Add Icon"
                     width="24px"
@@ -331,68 +319,102 @@ function Location() {
                   >
                     <use href="#commutes-add-icon" />
                   </svg>
-                  <div className="label">add alternative address</div>
+                  <span className="label">home</span>
                 </button>
               </div>
-              {/* <button
-                className="left-control"
-                data-direction="-1"
-                aria-label="Scroll left"
-              >
-                <svg
-                  width="24px"
-                  height="24px"
-                  xmlns="http://www.w3.org/2000/svg"
+  
+              <div className="commutes-destinations" style={{ display: `${addresses.length > 0 ? 'flex' : 'none'}` }}>
+                <div className="destinations-container">
+                  <div className="destination-list">
+                    {addresses.map((item, i) => {
+                      return (
+                        <div className={`destination ${selectedItem == i ? 'active' : ''}`} onClick={() => handleSelectItem(i)} tabIndex={i} role="button">
+                          <div className="destination-content">
+                            <div className="metadata">{item.distance}</div>
+                            <div className="address">To <abbr title={item.destinationAddress}>{item.destinationAddress}</abbr></div>
+                            <div className="destination-eta">{item.duration}</div>
+                          </div>
+                          <div className="destination-controls">
+                            <button onClick={() => { handleSelectItem(i); handleAddAddressDialoge(); setEdit(true); }} className="edit-button" aria-label="Edit Destination">
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <button onClick={() => handleAddAddressDialoge()} className="add-button">
+                    <svg
+                      aria-label="Add Icon"
+                      width="24px"
+                      height="24px"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <use href="#commutes-add-icon" />
+                    </svg>
+                    <div className="label">add alternative address</div>
+                  </button>
+                </div>
+                {/* <button
+                  className="left-control"
                   data-direction="-1"
+                  aria-label="Scroll left"
                 >
-                  <use href="#commutes-chevron-left-icon" data-direction="-1" />
-                </svg>
-              </button> */}
-              <button
-                className="right-control hide"
-                data-direction="1"
-                aria-label="Scroll right"
-              >
-                <svg
-                  width="24px"
-                  height="24px"
-                  xmlns="http://www.w3.org/2000/svg"
+                  <svg
+                    width="24px"
+                    height="24px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-direction="-1"
+                  >
+                    <use href="#commutes-chevron-left-icon" data-direction="-1" />
+                  </svg>
+                </button> */}
+                <button
+                  className="right-control hide"
                   data-direction="1"
+                  aria-label="Scroll right"
                 >
-                  <use href="#commutes-chevron-right-icon" data-direction="1" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </main>
-        <div className="commutes-modal-container" style={{ display: `${addAddress ? 'block' : 'none'}` }}>
-          <div className="commutes-modal">
-
-            <div className="content">
-              <h2 className="heading">add home address</h2>
-              <form id="destination-form">
-                <AutoComplete hideDialog={(e) => setAddAddress(e)} empty={empty} handleSetAddress={(e) => handleSetAddress(e)} handleDestinationLatLng={(e, x) => handleDestinationLatLng(e, x)} />
-                <div className="error-message"></div>
-
-              </form>
-              <div className="modal-action-bar">
-
-                <button className={`delete-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => handleDeleteItem()} type="reset">Delete</button>
-                <button className="cancel-button mr-4" onClick={() => { setAddAddress(false); setEmpty(false) }} type="reset">Cancel</button>
-
-                
-                <button className={`add-destination-button ${isEdit ? 'hide' : ''}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">Add</button>
-                <button className={`edit-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">
-                  Done
+                  <svg
+                    width="24px"
+                    height="24px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-direction="1"
+                  >
+                    <use href="#commutes-chevron-right-icon" data-direction="1" />
+                  </svg>
                 </button>
+              </div>
+            </div>
+          </main>
+          <div className="commutes-modal-container" style={{ display: `${addAddress ? 'block' : 'none'}` }}>
+            <div className="commutes-modal">
+  
+              <div className="content">
+                <h2 className="heading">add home address</h2>
+                <form id="destination-form">
+                  <AutoComplete hideDialog={(e) => setAddAddress(e)} empty={empty} handleSetAddress={(e) => handleSetAddress(e)} handleDestinationLatLng={(e, x) => handleDestinationLatLng(e, x)} />
+                  <div className="error-message"></div>
+  
+                </form>
+                <div className="modal-action-bar">
+  
+                  <button className={`delete-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => handleDeleteItem()} type="reset">Delete</button>
+                  <button className="cancel-button mr-4" onClick={() => { setAddAddress(false); setEmpty(false) }} type="reset">Cancel</button>
+  
+                  
+                  <button className={`add-destination-button ${isEdit ? 'hide' : ''}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">Add</button>
+                  <button className={`edit-destination-button ${isEdit ? '' : 'hide'}`} onClick={() => { setAddressToState(true); setEmpty(false) }} type="button">
+                    Done
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-    </LoadScript>
-  );
+  
+      </LoadScript>
+    );
+  }
 }
 
 export default Location;

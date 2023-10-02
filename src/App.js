@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
+  
   const checkAuth = async () => {
     let flag = false;
     localStorage.getItem("authorization") ? flag=true : flag=false

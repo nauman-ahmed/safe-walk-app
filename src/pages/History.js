@@ -3,6 +3,7 @@ import Header from "../Components/ui/header";
 import Footer from "../Components/ui/footer";
 import { getUserTrips } from "../API/api"
 import { decodeToken } from "react-jwt";
+import { Link,useNavigate } from 'react-router-dom'; // Use Link from react-router-dom for navigation
 
 function HistoryPage() {
   // Sample data for the history table
@@ -11,9 +12,11 @@ function HistoryPage() {
   //   { from: "Location C", to: "Location D", timeTaken: "1.5 hours" },
   // ];
 
+  const navigate = useNavigate()
   const [historyData, setHistoryData] = useState(null)
 
   useEffect(()=>{
+
     let storageData = localStorage.getItem("authorization")
     let details = decodeToken(storageData)
     getUserTrips({details}).then((res) => {
@@ -34,6 +37,10 @@ function HistoryPage() {
     })
   },[])
 
+  if(!localStorage.getItem("authorization")){
+    return navigate('/');
+  }
+  
   return (
     <div className={`font-lato antialiased text-gray-900 tracking-tight`}>
       <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
