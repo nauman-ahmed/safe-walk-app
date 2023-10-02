@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
  
 router.post("/create",authController.authUser,tripsController.create); 
-// router.post("/delete",authController.authUser,userController.login);
+router.post("/getUserTrip",authController.authUser,tripsController.getAll);
 
 
 module.exports = router;

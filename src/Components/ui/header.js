@@ -88,14 +88,14 @@ export default function Header(props) {
                           Trip History
                         </Link>
                       </li>
-                      {/* <li>
+                      <li>
                         <Link
                           to="/map"
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
                          Go to Map
                         </Link>
-                      </li> */}
+                      </li>
                       <li>
                         <Link
                           to="/settings"

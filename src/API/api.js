@@ -13,6 +13,15 @@ export const getUser = async (data) => {
     }
 }
 
+export const getUserTrips = async (data) => {
+    try {
+        const response = await axios.post(BASE_URL+"trips/getUserTrip",data);
+        return response.data;
+    } catch (error) {
+        console.log("ERROR IN REGISTARTION")
+    }
+}
+
 export const registerUser = async (data) => {
     try {
         const response = await axios.post(BASE_URL+"user/register",data);

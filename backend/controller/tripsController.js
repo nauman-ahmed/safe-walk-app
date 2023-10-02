@@ -17,3 +17,13 @@ exports.create = async (req, res, next) => {
     console.log("Successfully created Trip")
     return res.json("Successfully created");
 }
+
+exports.getAll = async (req, res, next) => {
+    const { details, sourceAddress, destinationTrips} = req.body
+    var history = await tripHistory.find({
+        userId:details._id,
+    });
+
+    console.log(history)
+    return res.json(history);
+}
