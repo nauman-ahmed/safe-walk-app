@@ -10,6 +10,7 @@ import {
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import LandingPage from "./pages/Landing";
+import ProfilePage from "./pages/Profile";
 
 function App() {
 
@@ -21,12 +22,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/" element={<Location />} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-
-
-        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/map" element={<Location />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
