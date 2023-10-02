@@ -20,7 +20,7 @@ function HistoryPage() {
             <div className="max-w-4xl mx-auto px-4 text-center">
               <h1 className="text-3xl font-semibold mb-4">History Page</h1>
               <p className="text-xl text-purple-300">
-                Welcome to your history page!
+                Welcome to your Travel history page!
               </p>
             </div>
           </div>
