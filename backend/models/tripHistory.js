@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     userId: {
         type: mongoose.Types.ObjectId,
         ref: 'Users',
-        unique: true
+        // unique: true
     },
 })
 

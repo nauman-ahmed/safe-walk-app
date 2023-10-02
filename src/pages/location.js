@@ -258,8 +258,6 @@ function Location() {
   const tripsDestinationHandler = () => {
     let storageData = localStorage.getItem("authorization")
     let details = decodeToken(storageData)
-    const directionsRenderer =  new window.google.maps.DirectionsRenderer();
-    directionsRenderer.setDirections(null)
     createTrip({details,sourceAddress, destinationTrips})
     setAddAddress(false)
     setEmpty(false)
