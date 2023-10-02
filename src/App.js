@@ -12,6 +12,7 @@ import SignupPage from "./pages/Signup";
 import LandingPage from "./pages/Landing";
 import ProfilePage from "./pages/Profile";
 import { setAuthToken } from "./API/setCommonHeader"
+import HistoryPage from "./pages/History";
 
 function App() {
 
@@ -37,6 +38,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/map" element={<Location />} />
+        <Route path="/history" element={<HistoryPage />} />
+
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
