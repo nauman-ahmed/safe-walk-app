@@ -39,3 +39,12 @@ export const createTrip = async (data) => {
         console.log("ERROR IN UPDATE")
     }
 }
+
+export const sendText = async (data) => {
+    try {
+        const response = await axios.post(BASE_URL+"text/send",data);
+        return response.data;
+    } catch (error) {
+        console.log("ERROR IN UPDATE")
+    }
+}

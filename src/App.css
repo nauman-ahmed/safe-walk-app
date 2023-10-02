@@ -59,6 +59,38 @@ body {
   padding: 0;
 }
 
+.adp-warnbox{
+  display: none;
+}
+
+.adp-summary{
+  color: var(--green);
+}
+
+.adp-placemark tbody tr:nth-child(odd) {
+  /* Apply styles to odd-numbered records (1st, 3rd, 5th, etc.) */
+  background-color: var(--black);
+  color: var(--green);
+  padding: 5%;
+}
+
+.adp-placemark tbody tr:nth-child(even) {
+  /* Apply styles to even-numbered records (2nd, 4th, 6th, etc.) */
+  background-color: var(--black);
+  color: var(--green);
+  padding: 5%;
+}
+
+.adp-directions tbody tr:nth-child(odd) {
+  /* Apply styles to odd-numbered records (1st, 3rd, 5th, etc.) */
+  color: var(--green);
+}
+
+.adp-directions tbody tr:nth-child(even) {
+  /* Apply styles to even-numbered records (2nd, 4th, 6th, etc.) */
+  color: var(--green);
+}
+
 .contacts {
   background-color: var(--black);
   display: flex;
@@ -114,7 +146,7 @@ body {
 }
 
 #directions-panel {
-  background-color: white;
+  /* background-color: white; */
   direction: ltr;
   height: 500px;
   overflow-y: auto;

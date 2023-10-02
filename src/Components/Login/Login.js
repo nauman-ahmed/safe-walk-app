@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginFields } from "../../constants/formFields";
 import FormAction from "../FormAction/FormAction";
 import FormExtra from "../FormExtra/FormExtra";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../API/api";
+import { setAuthToken } from "../../API/setCommonHeader";
+import { decodeToken } from "react-jwt";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -21,10 +24,42 @@ export default function Login() {
     authenticateUser();
   };
 
+  const checkAuth = async () => {
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
+
+    if(flag){
+      navigate('/map');
+      setAuthToken(localStorage.getItem("authorization"))
+    }
+
+  }
+
+  useEffect(()=>{
+      checkAuth()
+  },[])
+
   //Handle Login API Integration here
   const authenticateUser = () => {
-    navigate('/map');
+
+
+    loginUser({
+      email:loginState.email_address,
+      password:loginState.password,
+    }).then((res)=>{
+      if(res.message == "Successfully Login"){
+        console.log("Successfully Login")
+        localStorage.setItem("authorization",res.token!==undefined?res.token:"")
+        setAuthToken(res.token)
+        navigate('/map');
+      }else{
+        console.log("ERROR")
+        alert("INVALID CREDENTIALS")
+      }
+    })
   };
+
+
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -45,7 +80,7 @@ export default function Login() {
         ))}
       </div>
 
-      <FormExtra />
+      {/* <FormExtra /> */}
       <FormAction handleSubmit={handleSubmit} text="Login" />
     </form>
   );
