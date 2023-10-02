@@ -9,6 +9,7 @@ import { setAuthToken } from "../API/setCommonHeader"
 import { getAddressFromLatLong } from "../userServices/service"
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
+import  Header from "../Components/ui/map"
 
 function Location() {
 
@@ -26,7 +27,6 @@ function Location() {
   const [sourceAddress, setSourceAddress] = useState("");
   const [destinationTrips, setDestinationTrips] = useState([]);
   
-  const navigate = useNavigate()
   
   const checkAuth = async () => {
     let flag = false;
@@ -108,8 +108,7 @@ function Location() {
     localStorage.setItem("mobileNumber", phoneNumber);
     setName('');
     setPhoneNumber('');
-    localStorage.removeItem("authorization")
-    navigate('/');
+   
   }
 
   const handleAddAddressDialoge = () => {
@@ -248,8 +247,8 @@ function Location() {
   return (
     <LoadScript googleMapsApiKey="AIzaSyB5uijdNdiYHE6vfZO_aFNb-Lq_pjZxMVA" libraries={["places"]}>
 
-      <div className="App">
-        <svg className="hide">
+      <div className="App"> 
+        {/* <svg className="hide">
           <defs>
             <symbol id="commutes-add-icon">
               <path d="M0 0h24v24H0V0z" fill="none" />
@@ -257,34 +256,9 @@ function Location() {
             </symbol>
           </defs>
           <use href="#commutes-add-icon" />
-        </svg>
+        </svg> */}
         <main className="commutes">
-
-          <div className="contacts">
-            <form>
-              <label htmlFor="exampleContactName">add emergency contact</label>
-              <input
-                type="text"
-                className="form-control name"
-                id="exampleContactName"
-                aria-describedby="contactName"
-                placeholder="  name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-
-              <label htmlFor="examplePhoneNumber"></label>
-              <input
-                type="tel"
-                value={phoneNumber}
-                className="form-control mobileNumber"
-                id="examplePhoneNumber"
-                placeholder="  mobile number"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-              <button type="button" onClick={() => handleSubmit()} className="btn btn-primary submit">  submit</button>
-            </form>
-          </div>
+          <Header/>
           <div style={{ position: "relative", display:"flex" }}>
             <div style={addresses.length > 0 ? { width: '60%' } : { width: '100%' }}>
               <Map myLocation={originLatLng} addresses={addresses} selectedItem={selectedItem} handleSelectItem={(i) => handleSelectItem(i)} />
@@ -292,10 +266,14 @@ function Location() {
             <div style={addresses.length > 0 ? { width: '40%',position: "relative" } : { display: 'none',position: "relative" }}>
               <div id="directions-panel"></div>
               <div style={{ display:"flex", width: "100%", justifyContent: "space-evenly" }}>
-                <button className="add-button" onClick={tripsDestinationHandler}>
+                <button                  
+                  className="py-2 px-5 bg-red-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
+                  onClick={tripsDestinationHandler}>
                 End
                 </button>
-                <button className="add-button" onClick={sendtextHandler}>
+                <button 
+                  className="py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
+                  onClick={sendtextHandler}>
                   Contact
                 </button>
               </div>
