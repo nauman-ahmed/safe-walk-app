@@ -98,3 +98,16 @@ exports.updateArtist = async function (req, res, next) {
     }
 
 };
+
+exports.getData = async (req, res, next) => {
+
+    const user = await Users.findOne({
+        _id: req.body.details._id
+    });
+
+    if(user !== null){
+        return res.status(200).json(user);
+    }else{
+        return res.json(err.message);
+    }
+}

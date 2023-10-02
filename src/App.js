@@ -11,11 +11,22 @@ import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import LandingPage from "./pages/Landing";
 import ProfilePage from "./pages/Profile";
+import { setAuthToken } from "./API/setCommonHeader"
 
 function App() {
 
+  const checkAuth = async () => {
+    let flag = false;
+    localStorage.getItem("authorization") ? flag=true : flag=false
+
+    if(flag){
+      setAuthToken(localStorage.getItem("authorization"))
+    }
+
+  }
+
   useEffect(()=>{
-    
+      checkAuth()
   },[])
 
   return (

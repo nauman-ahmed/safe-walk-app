@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../Components/ui/footer';
 import Header from '../Components/ui/header';
+import { getUser } from "../API/api"
+import { decodeToken } from "react-jwt";
 
 function Profile() {
+
+  const [user, setUser] = useState(null)
+
+  useEffect(()=>{
+    let storageData = localStorage.getItem("authorization")
+    let details = decodeToken(storageData)
+    getUser({details}).then((res) => {
+      setUser(res)
+    })
+  },[])
+
   return (
     <div
       className={`font-lato antialiased bg-white text-gray-900 tracking-tight`}
@@ -22,22 +35,22 @@ function Profile() {
           </div>
           <div className="text-center mt-4">
             <h1 className="text-3xl font-semibold text-light-green-500">
-              Aleena
+             {user && user.firstName}  {user && user.lastName}  
             </h1>
             <p className="text-lg text-purple-300">Futuristic Enthusiast</p>
 
             {/* Additional Info */}
             <div className="mt-6">
-              <p className="text-lg text-light-green-500">
+              <p className="text-lg text-light-white-500">
                 Location: New York, USA
               </p>
-              <p className="text-lg text-light-green-500">
-                Email: aleena@example.com
+              <p className="text-lg text-light-white-500">
+                Email: {user && user.email}
               </p>
-              <p className="text-lg text-light-green-500">
+              <p className="text-lg text-light-white-500">
                 Interests: Technology, Space, AI
               </p>
-              <p className="text-lg text-light-green-500">
+              <p className="text-lg text-light-white-500">
                 Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Nullam placerat risus sed gravida.
               </p>
