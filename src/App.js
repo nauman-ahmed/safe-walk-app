@@ -13,6 +13,8 @@ import LandingPage from "./pages/Landing";
 import ProfilePage from "./pages/Profile";
 import { setAuthToken } from "./API/setCommonHeader"
 import HistoryPage from "./pages/History";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -31,6 +33,7 @@ function App() {
   },[])
 
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -43,6 +46,9 @@ function App() {
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
+     <ToastContainer />
+    </>
+    
   );
 }
 

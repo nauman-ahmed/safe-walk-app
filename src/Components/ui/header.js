@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './logo'; // Replace with the correct path to your Logo component
 import MobileMenu from './mobile-menu'; // Replace with the correct path to your MobileMenu component
-import { Link } from 'react-router-dom'; // Use Link from react-router-dom for navigation
+import { Link,useNavigate } from 'react-router-dom'; // Use Link from react-router-dom for navigation
 import PreviousMap from 'postcss/lib/previous-map';
 import { setAuthToken } from "../../API/setCommonHeader"
 
@@ -9,12 +9,14 @@ export default function Header(props) {
   const [top, setTop] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [auth, setAuth] = useState(false);
+  const navigate = useNavigate()
 
   const checkAuth = async () => {
     let flag = false;
     localStorage.getItem("authorization") ? flag=true : flag=false
 
     if(flag){
+      console.log("checkAuth",localStorage.getItem("authorization"))
       setAuth(true)
       setAuthToken(localStorage.getItem("authorization"))
     }
@@ -54,6 +56,7 @@ export default function Header(props) {
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex md:grow">
+            {console.log("RENDER",auth)}
             {/* Desktop sign-in links */}
               {auth ? 
             <ul className="flex grow justify-end flex-wrap items-center">
@@ -100,6 +103,10 @@ export default function Header(props) {
                         <Link
                           to="/settings"
                           className="block px-4 py-2 hover:bg-gray-100"
+                          onClick = {() => {
+                            localStorage.removeItem("authorization")
+                            navigate('/');
+                          }}
                         >
                           Logout
                         </Link>
