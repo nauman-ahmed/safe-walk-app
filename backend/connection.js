@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const url = "mongodb+srv://nauman:niksonboy123@cluster0.ogjnj.mongodb.net/SafeWalkDB"
 
 const connectDB = async () => {
-    await mongoose.connect(url).
+    await mongoose.connect(process.env.url).
     then(async (x) => {
             console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
         })
