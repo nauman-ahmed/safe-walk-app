@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Logo from './logo'; // Replace with the correct path to your Logo component
 import MobileMenu from './mobile-menu'; // Replace with the correct path to your MobileMenu component
 import { Link } from 'react-router-dom'; // Use Link from react-router-dom for navigation
+import PreviousMap from 'postcss/lib/previous-map';
 
-export default function Header() {
+export default function Header(props) {
   const [top, setTop] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -24,7 +25,9 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed bg-gray-800 text-gray-200 w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
+      className={props.fixed ? `bg-gray-800 text-gray-200 w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
+        !top ? 'bg-white backdrop-blur-sm shadow-lg text-gray-800' : ''
+      }`: `fixed bg-gray-800 text-gray-200 w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
         !top ? 'bg-white backdrop-blur-sm shadow-lg text-gray-800' : ''
       }`}
     >
@@ -41,7 +44,7 @@ export default function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  to="/signin"
+                  to="/login"
                   className="font-medium transition duration-300 focus:outline-none focus:text-yellow-500 focus:underline hover:underline hover:text-yellow-500 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Sign in

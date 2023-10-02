@@ -1,17 +1,14 @@
-import Header from "../Components/Header/Header";
+import Header from "../Components/ui/header";
 import Login from "../Components/Login/Login";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center ">
-      <div className="max-w-md w-full space-y-8">
-        <Header
-          heading="Login to your account"
-          paragraph="Don't have an account yet? "
-          linkName="Signup"
-          linkUrl="/signup"
-        />
-        <Login />
+    <div className={`font-lato antialiased bg-black text-gray-900 tracking-tight`}>
+      <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
+        <Header fixed={true}/>
+        <div className=" m-auto max-w-md w-full space-y-8">
+          <Login />
+        </div>
       </div>
     </div>
   );
