@@ -145,12 +145,12 @@ function Location() {
   }
 
   const handleCalculateDistance = () => {
-    const origin = new window.google && new window.google.maps.LatLng(originLatLng.lat, originLatLng.lng); // Replace with actual origin latlng
-    const destination = new window.google && new window.google.maps.LatLng(destinationLatLng.lat, destinationLatLng.lng); // Replace with actual destination latlng
+    const origin =  new window.google.maps.LatLng(originLatLng.lat, originLatLng.lng); // Replace with actual origin latlng
+    const destination =  new window.google.maps.LatLng(destinationLatLng.lat, destinationLatLng.lng); // Replace with actual destination latlng
 
     destinationTripsHandler(destinationLatLng.lat, destinationLatLng.lng)
     
-    const service = new window.google && new window.google.maps.DistanceMatrixService();
+    const service =  new window.google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       {
         origins: [origin],
@@ -193,11 +193,11 @@ function Location() {
 
 
   const handleDrawRoute = async () => {
-    const origin = new window.google && new window.google.maps.LatLng(originLatLng.lat, originLatLng.lng); // Replace with actual origin latlng
-    const destination = new window.google && new window.google.maps.LatLng(destinationLatLng.lat, destinationLatLng.lng); // Replace with actual destination latlng
+    const origin =  new window.google.maps.LatLng(originLatLng.lat, originLatLng.lng); // Replace with actual origin latlng
+    const destination =  new window.google.maps.LatLng(destinationLatLng.lat, destinationLatLng.lng); // Replace with actual destination latlng
 
-    const directionsRenderer = new window.google && new window.google.maps.DirectionsRenderer();
-    const directionsService = new window.google && new window.google.maps.DirectionsService();
+    const directionsRenderer =  new window.google.maps.DirectionsRenderer();
+    const directionsService =  new window.google.maps.DirectionsService();
     directionsRenderer.setPanel(document.getElementById("directions-panel"));
     await directionsService.route(
       {
@@ -240,7 +240,7 @@ function Location() {
   const tripsDestinationHandler = () => {
     let storageData = localStorage.getItem("authorization")
     let details = decodeToken(storageData)
-    const directionsRenderer = new window.google && new window.google.maps.DirectionsRenderer();
+    const directionsRenderer =  new window.google.maps.DirectionsRenderer();
     directionsRenderer.setDirections(null)
     createTrip({details,sourceAddress, destinationTrips})
     setAddAddress(false)
