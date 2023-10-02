@@ -10,6 +10,7 @@ import {
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
 import LandingPage from "./pages/Landing";
+import ProfilePage from "./pages/Profile";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         {/* <Route path="/" element={<Location />} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
 
 
         {/* <Route path="/signup" element={<SignUp />} /> */}

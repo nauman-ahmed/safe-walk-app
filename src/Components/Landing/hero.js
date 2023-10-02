@@ -39,8 +39,8 @@ export default function Hero() {
               </p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
-                <a className="btn text-white bg-green-500 hover:bg-green-600 w-full sm:w-auto sm:ml-4 rounded-full py-3 px-6" href="#0">
-                  Another Button
+                <a className="btn text-white bg-green-500 hover:bg-green-600 w-full sm:w-auto sm:ml-4 rounded-full py-3 px-6" href="/map">
+                  Map
                 </a>
 
                 </div>
