@@ -1,130 +1,112 @@
 export default function FeaturesBlocks() {
   return (
-    <section className="relative bg-black text-white"> {/* Set the background to black and text color to white */}
-      <div className="absolute inset-0 top-1/2 md:mt-24 lg:mt-0 bg-green-300 pointer-events-none" aria-hidden="true"></div> {/* Use green color for the top background */}
-      <div className="absolute left-0 right-0 bottom-0 m-auto w-px p-px h-20 bg-purple-600 transform translate-y-1/2"></div> {/* Use purple color for the bottom line */}
-
+    <section className="relative bg-black text-white">
+      {" "}
+      {/* Set the background to black and text color to white */}
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="py-12 md:py-20">
-
+        <div className="pb-12 md:pb-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4 text-green-500">Explore the solutions</h2> {/* Use green color for the header */}
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h2 className="h2 mb-4 text-green-500">
+              Key Features of Safe Walk
+            </h2>{" "}
+            {/* Use green color for the header */}
+            <p className="text-xl text-gray-600">
+              Discover how Safe Walk ensures your safety during walks.
+            </p>
           </div>
 
           {/* Items */}
           <div className="max-w-sm mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start md:max-w-2xl lg:max-w-none">
-
             {/* 1st item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M34.514 35.429l2.057 2.285h8" />
-                    <path className="stroke-current text-white" d="M20.571 26.286h5.715l2.057 2.285" />
-                    <path className="stroke-current text-white" d="M20.571 37.714h5.715L36.57 26.286h8" />
-                    <path className="stroke-current text-white" strokeLinecap="square" d="M41.143 34.286l3.428 3.428-3.428 3.429" />
-                    <path className="stroke-current text-white" strokeLinecap="square" d="M41.143 29.714l3.428-3.428-3.428-3.429" />  
-                  </g>
-                </g>
+            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl">
+              {" "}
+              {/* Use purple color for the background */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                rx="32"
+                viewBox="0 0 100 100"
+                fill="#FF0000"
+              >
+                <circle cx="50" cy="50" r="40" fill="#FF0000" />
+
+                <path
+                  d="M50 20c-2.2 0-4 1.8-4 4v28c0 2.2 1.8 4 4 4s4-1.8 4-4V24c0-2.2-1.8-4-4-4z"
+                  fill="#FFF"
+                />
+
+                <circle cx="50" cy="75" r="5" fill="#FFF" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                Real-time Safety Alerts
+              </h4>
+              <p className="text-gray-600 text-center">
+                {" "}
+                Get instant safety alerts and notifications during your walks.
+              </p>
             </div>
 
             {/* 2nd item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2" transform="translate(19.429 20.571)">
-                    <circle className="stroke-current text-white" strokeLinecap="square" cx="12.571" cy="12.571" r="1.143" />
-                    <path className="stroke-current text-white" d="M19.153 23.267c3.59-2.213 5.99-6.169 5.99-10.696C25.143 5.63 19.514 0 12.57 0 5.63 0 0 5.629 0 12.571c0 4.527 2.4 8.483 5.99 10.696" />
-                    <path className="stroke-current text-white" d="M16.161 18.406a6.848 6.848 0 003.268-5.835 6.857 6.857 0 00-6.858-6.857 6.857 6.857 0 00-6.857 6.857 6.848 6.848 0 003.268 5.835" />
-                  </g>
-                </g>
+            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl">
+              {" "}
+              {/* Use purple color for the background */}
+              <svg
+                id="Layer_1"
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 512 512"
+              >
+                <title>location-pin-glyph</title>
+                <path d="M256,0C138.37,0,42.67,95.7,42.67,213.33c0,158.93,193.27,289.59,201.5,295.08a21.33,21.33,0,0,0,23.67,0c8.23-5.49,201.5-136.16,201.5-295.08C469.33,95.7,373.63,0,256,0Zm0,106.67A106.67,106.67,0,1,1,149.33,213.33,106.79,106.79,0,0,1,256,106.67ZM192,213.33a64,64,0,1,1,64,64A64.07,64.07,0,0,1,192,213.33Z" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                GPS Tracking
+              </h4>
+              <p className="text-gray-600 text-center">
+                Share your real-time location with trusted contacts for added
+                security.
+              </p>
             </div>
 
             {/* 3rd item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M34.743 29.714L36.57 32 27.43 43.429H24" />
-                    <path className="stroke-current text-white" strokeLinecap="square" d="M34.743 41.143l1.828 2.286H40" />
-                    <path className="stroke-current text-white" d="M24 32h3.429" strokeLinecap="square" />
-                    <path className="stroke-current text-white" d="M36.571 32H40" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
+            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl">
+              {" "}
+              {/* Use purple color for the background */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 100 100"
+                fill="none"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="50" cy="20" r="8" fill="black" />
 
-            {/* 4th item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M32 37.714A5.714 5.714 0 0037.714 32a5.714 5.714 0 005.715 5.714" />
-                    <path className="stroke-current text-white" d="M32 37.714a5.714 5.714 0 015.714 5.715 5.714 5.714 0 015.715-5.715" />
-                    <path className="stroke-current text-white" d="M20.571 26.286a5.714 5.714 0 005.715-5.715A5.714 5.714 0 0032 26.286" />
-                    <path className="stroke-current text-white" d="M20.571 26.286A5.714 5.714 0 0126.286 32 5.714 5.714 0 0132 26.286" />
-                    <path className="stroke-current text-white" d="M21.714 40h4.572" strokeLinecap="square" />
-                    <path className="stroke-current text-white" d="M24 37.714v4.572" strokeLinecap="square" />
-                    <path className="stroke-current text-white" d="M37.714 24h4.572" strokeLinecap="square" />
-                    <path className="stroke-current text-white" d="M40 21.714v4.572" strokeLinecap="square" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
+                <line x1="50" y1="28" x2="50" y2="55" />
 
-            {/* 5th item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M19.429 32a12.571 12.571 0 0021.46 8.89L23.111 23.11A12.528 12.528 0 0019.429 32z" />
-                    <path className="stroke-current text-white" d="M32 19.429c6.943 0 12.571 5.628 12.571 12.571" />
-                    <path className="stroke-current text-white" d="M32 24a8 8 0 018 8" />
-                    <path className="stroke-current text-white" d="M34.286 29.714L32 32" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
+                <line x1="50" y1="36" x2="35" y2="45" />
+                <line x1="50" y1="36" x2="65" y2="45" />
 
-            {/* 6th item */}
-            <div className="relative flex flex-col items-center p-6 bg-purple-600 rounded shadow-xl"> {/* Use purple color for the background */}
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2" strokeLinecap="square">
-                    <path className="stroke-current text-white" d="M29.714 40.358l-4.777 2.51 1.349-7.865-5.715-5.57 7.898-1.147L32 21.13l3.531 7.155 7.898 1.147L40 32.775" />
-                    <path className="stroke-current text-white" d="M44.571 43.429H34.286" />
-                    <path className="stroke-current text-white" d="M44.571 37.714H34.286" />
-                  </g>
-                </g>
+                <line x1="50" y1="55" x2="35" y2="70" />
+                <line x1="50" y1="55" x2="65" y2="70" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Headless CMS</h4>
-              <p className="text-gray-600 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+                Walking History
+              </h4>
+              <p className="text-gray-600 text-center">
+                Access a 30-day walking history to track your walking routes.
+              </p>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
-import FeaturesBg from '../../images/features-bg.png';
-import FeaturesElement from '../../images/features-element.png';
+import MapImage from '../../images/purple-map.png'; // Replace with your app-related image
 
 export default function Features() {
   const [tab, setTab] = useState(1);
@@ -16,22 +15,26 @@ export default function Features() {
   }, []);
 
   return (
-    <section className="relative bg-black text-white"> {/* Set the background to black and text color to white */}
+    <section className="relative bg-black text-white">
       <div className="absolute inset-0 pointer-events-none mb-16" aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 md:pt-20">
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4 text-green-500">Explore the solutions</h1> {/* Use green color for the header */}
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h1 className="h2 mb-4 text-green-500">Stay Safe with Safe Walk</h1> {/* Update the header */}
+            <p className="text-xl text-gray-600">
+              Explore the features that make Safe Walk the ultimate companion for secure and worry-free walks.
+            </p>
           </div>
 
           <div className="md:grid md:grid-cols-12 md:gap-6">
             <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3 text-purple-500">Powerful suite of tools</h3> {/* Use purple color for the heading */}
-                <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
+                <h3 className="h3 mb-3 text-purple-500">Key Features</h3> {/* Use purple color for the heading */}
+                <p className="text-xl text-gray-600">
+                  Discover how Safe Walk provides you with peace of mind during your walks:
+                </p>
               </div>
               <div className="mb-8 md:mb-0">
                 <a
@@ -45,9 +48,9 @@ export default function Features() {
                   }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1 text-purple-500">Real-time GPS Tracking</div>
                     <div className="text-gray-600">
-                      Take collaboration to the next level with security and administrative features built for teams.
+                      Keep track of your exact location and share it with trusted contacts in real-time.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -78,15 +81,8 @@ export default function Features() {
                     unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
-                      <img className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <img
-                        className="md:max-w-none absolute w-full left-0 transform animate-float"
-                        src={FeaturesElement}
-                        width={500}
-                        height="44"
-                        alt="Element"
-                        style={{ top: '30%' }}
-                      />
+                      <img className="md:max-w-none mx-auto rounded" src={MapImage} width={500} height="462" alt="Map" />
+                      {/* Include app-related image or graphics */}
                     </div>
                   </Transition>
                   {/* Include Transition for tab 2 and tab 3 similarly */}
