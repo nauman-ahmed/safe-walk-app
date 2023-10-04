@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../Components/ui/footer";
 import Header from "../Components/ui/header";
-import { getUser } from "../API/api";
+import { getUser,UpdateUser } from "../API/api";
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [signupState, setSignupState] = useState({
+    firstName:"",
+    lastName:"",
+    email:"",
+    bio:"",
+    interests:"",
+    address:"",
+    password:"",
+  });
 
   useEffect(() => {
     let storageData = localStorage.getItem("authorization");
@@ -17,11 +28,45 @@ function Profile() {
     });
   }, []);
 
+  const handleChange = (e) => {
+    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here (e.g., update user data)
-    // You can access form values using e.target.<input_name>.value
-    // For example, e.target.firstName.value to access the first name input value
+
+    if (
+      signupState.firstName !== "" && 
+      signupState.lastName !== "" && 
+      signupState.email !== "" && 
+      signupState.bio !== "" && 
+      signupState.interests !== "" && 
+      signupState.address !== "" 
+      
+      ) {
+      UpdateUser(signupState).then(res => {
+        console.log("getUser",res)
+        if(res == "Error"){
+          toast.error("Error In Updated")
+        }else{
+          setSignupState({
+            firstName:"",
+            lastName:"",
+            email:"",
+            bio:"",
+            interests:"",
+            address:"",
+            password:"",
+          })
+          setUser(res)
+          toast.success("Update Successfully")
+        }
+      })
+    } else {
+      toast.error("At least one field is empty.");
+    }
+
+    
   };
 
   if (!localStorage.getItem("authorization")) {
@@ -30,6 +75,7 @@ function Profile() {
 
   return (
     <div className="font-lato antialiased bg-gray-100 min-h-screen">
+      <ToastContainer />
       <Header />
       <div className="bg-black text-light-green-500 pb-16 pt-32">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center">
@@ -44,22 +90,20 @@ function Profile() {
               <h1 className="text-3xl font-semibold text-light-green-500 mt-4">
                 {user && user.firstName} {user && user.lastName}
               </h1>
-              <p className="text-lg text-purple-300">Futuristic Enthusiast</p>
             </div>
             {/* Additional Info */}
             <div className="mt-6">
-              <p className="text-lg text-light-white-500">
-                Location: New York, USA
+              <p className="text-md mb-3 text-light-white-500">
+                Address: {user && user.address ? user.address :  "New York, USA"} 
               </p>
-              <p className="text-lg text-light-white-500">
+              <p className="text-sm mb-3 text-light-white-500">
                 Email: {user && user.email}
               </p>
-              <p className="text-lg text-light-white-500">
-                Interests: Technology, Space, AI
+              <p className="text-lg mb-3 text-light-white-500">
+                Interests: {user && user.interests ? user.interests :  "Technology, Space, AI"} 
               </p>
-              <p className="text-lg text-light-white-500">
-                Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam placerat risus sed gravida.
+              <p className="text-lg mb-3 text-light-white-500">
+                Bio: {user && user.bio ? user.bio :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam placerat risus sed gravida"}  
               </p>
             </div>
           </div>
@@ -85,6 +129,8 @@ function Profile() {
                     id="firstName"
                     name="firstName"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.firstName}
                   />
                 </div>
 
@@ -100,6 +146,8 @@ function Profile() {
                     id="lastName"
                     name="lastName"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.lastName}
                   />
                 </div>
 
@@ -115,6 +163,42 @@ function Profile() {
                     id="email"
                     name="email"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.email}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="password"
+                    className="block text-gray-600 text-sm mb-2"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.password}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="address"
+                    className="block text-gray-600 text-sm mb-2"
+                  >
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.address}
                   />
                 </div>
 
@@ -130,6 +214,8 @@ function Profile() {
                     id="interests"
                     name="interests"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onChange={handleChange}
+                    value={signupState.interests}
                   />
                 </div>
 
@@ -145,13 +231,16 @@ function Profile() {
                     name="bio"
                     rows="4"
                     className="form-textarea shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  ></textarea>
+                    onChange={handleChange}
+                    value={signupState.bio}
+              ></textarea>
                 </div>
 
                 <div className="flex justify-end">
                   <button
                     type="submit"
                     className="bg-light-green-500 text-white border border-blue-400 bg-black px-4 py-2 rounded hover:bg-light-green-600 transition duration-300"
+                    onClick={handleSubmit}
                   >
                     Update
                   </button>

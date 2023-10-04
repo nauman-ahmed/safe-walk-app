@@ -43,7 +43,7 @@ export const loginUser = async (data) => {
 
 export const UpdateUser = async (data) => {
     try {
-        const response = await axios.post(BASE_URL+"user/updateArtist",data);
+        const response = await axios.post(BASE_URL+"user/updateUser",data);
         return response.data;
     } catch (error) {
         console.log("ERROR IN UPDATE")

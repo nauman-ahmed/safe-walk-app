@@ -56,7 +56,6 @@ export default function Header(props) {
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex md:grow">
-            {console.log("RENDER",auth)}
             {/* Desktop sign-in links */}
               {auth ? 
             <ul className="flex grow justify-end flex-wrap items-center">

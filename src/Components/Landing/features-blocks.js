@@ -42,7 +42,7 @@ export default function FeaturesBlocks() {
               <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 Real-time Safety Alerts
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-white-600 text-center">
                 {" "}
                 Get instant safety alerts and notifications during your walks.
               </p>
@@ -66,7 +66,7 @@ export default function FeaturesBlocks() {
               <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 GPS Tracking
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-white-600 text-center">
                 Share your real-time location with trusted contacts for added
                 security.
               </p>
@@ -100,7 +100,7 @@ export default function FeaturesBlocks() {
               <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 Walking History
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-white-600 text-center">
                 Access a 30-day walking history to track your walking routes.
               </p>
             </div>

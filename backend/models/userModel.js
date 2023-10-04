@@ -22,6 +22,12 @@ const schema = new mongoose.Schema({
     address: {
         type: String,
     },
+    bio: {
+        type: String,
+    },
+    interests: {
+        type: String,
+    },
 })
 
 

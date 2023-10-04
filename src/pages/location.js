@@ -342,8 +342,8 @@ function Location() {
             <div className="commutes-info">
               <div className="commutes-initial-state max-w-6xl mx-auto flex-col sm:flex-row" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
                 <div className="description">
-                  <h1 className="heading">find your safe walk home</h1>
-                  <p>see travel time, directions, and zones to avoid</p>
+                  <h1 className="heading">Find Your Safe Walk Home</h1>
+                  <p>See Travel Time, Directions, and Zones to Avoid</p>
                 </div>
                 <button className="add-button mt-4 self-start sm:self-center sm:mt-0" onClick={() => handleAddAddressDialoge()}>
                   <svg
@@ -354,7 +354,7 @@ function Location() {
                   >
                     <use href="#commutes-add-icon" />
                   </svg>
-                  <span className="label">home</span>
+                  <span className="label">Home</span>
                 </button>
               </div>
   
@@ -387,7 +387,7 @@ function Location() {
                     >
                       <use href="#commutes-add-icon" />
                     </svg>
-                    <div className="label">add alternative address</div>
+                    <div className="label">Add Alternative Address</div>
                   </button>
                 </div>
                 {/* <button
@@ -425,7 +425,7 @@ function Location() {
             <div className="commutes-modal">
   
               <div className="content">
-                <h2 className="heading">add home address</h2>
+                <h2 className="heading">Add Home Address</h2>
                 <form id="destination-form">
                   <AutoComplete hideDialog={(e) => setAddAddress(e)} empty={empty} handleSetAddress={(e) => handleSetAddress(e)} handleDestinationLatLng={(e, x) => handleDestinationLatLng(e, x)} />
                   <div className="error-message"></div>

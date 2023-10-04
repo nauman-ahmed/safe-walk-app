@@ -57,13 +57,13 @@ export default function Header(props) {
           </div>
           <div className="py-2 px-3 text-yellow-900 hover:text-yellow-800 rounded transition duration-300 hidden lg:block ">
             <form>
-              <label className="text-white">ADD EMERGENCY CONTACT</label>
+              <label className="text-white">Add Emergency Contact</label>
               <input
                 type="text"
                 className="mx-3 rounded-md appearance-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
                 id="exampleContactName"
                 aria-describedby="contactName"
-                placeholder="  name"
+                placeholder="  Name"
                 onChange={(e) => setName(e.target.value)}
               />
 
@@ -72,10 +72,10 @@ export default function Header(props) {
                 type="tel"
                 className="rounded-md appearance-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
                 id="examplePhoneNumber"
-                placeholder="  mobile number"
+                placeholder="  Mobile Number"
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
-              <button type="button" onClick={handleSubmit} className="ml-5 py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300">  submit</button>
+              <button type="button" onClick={handleSubmit} className="ml-5 py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300">  Submit</button>
             </form>
           </div>
           {/* Desktop navigation */}
