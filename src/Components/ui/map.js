@@ -24,8 +24,8 @@ export default function Header(props) {
 
   useEffect(() => {
     scrollHandler();
-    window.addEventListener('scroll', scrollHandler);
-    return () => window.removeEventListener('scroll', scrollHandler);
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
   
   const handleSubmit = () => {
@@ -45,7 +45,7 @@ export default function Header(props) {
   return (
     <header
       className={` bg-gray-800 text-gray-200 w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
-        !top ? 'bg-white backdrop-blur-sm shadow-lg text-gray-800' : ''
+        !top ? "bg-white backdrop-blur-sm shadow-lg text-gray-800" : ""
       }`}
     >
       <ToastContainer/>
@@ -55,9 +55,9 @@ export default function Header(props) {
           <div className="shrink-0 mr-4">
             <Logo />
           </div>
-          <div className="py-2 px-3 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">
+          <div className="py-2 px-3 text-yellow-900 hover:text-yellow-800 rounded transition duration-300 hidden lg:block ">
             <form>
-              <label className='text-white'>ADD EMERGENCY CONTACT</label>
+              <label className="text-white">ADD EMERGENCY CONTACT</label>
               <input
                 type="text"
                 className="mx-3 rounded-md appearance-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
@@ -82,13 +82,9 @@ export default function Header(props) {
           <nav className="hidden md:flex md:grow">
             {/* Desktop sign-in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
-              
               {/* Profile Avatar */}
               <li className="relative ml-3 h-10">
-                <button
-                  onClick={toggleDropdown}
-                  className="focus:outline-none"
-                >
+                <button onClick={toggleDropdown} className="focus:outline-none">
                   <img
                     src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" // Replace with your avatar image URL
                     alt="Profile Avatar"
@@ -119,9 +115,9 @@ export default function Header(props) {
                         <Link
                           to="/settings"
                           className="block px-4 py-2 hover:bg-gray-100"
-                          onClick = {() => {
-                            localStorage.removeItem("authorization")
-                            navigate('/');
+                          onClick={() => {
+                            localStorage.removeItem("authorization");
+                            navigate("/");
                           }}
                         >
                           Logout

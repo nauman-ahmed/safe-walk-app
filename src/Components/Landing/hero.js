@@ -1,7 +1,7 @@
 import React from 'react';
-import VideoThumb from '../../images/hero-image.png';
+import VideoThumb from '../../images/purple-map.png';
 import ModalVideo from '../Landing/modal-video';
-
+import Video from '../../videos/video.mp4';
 export default function Hero() {
   return (
     <section className="relative bg-black text-white"> {/* Set the background to black and text color to white */}
@@ -31,11 +31,11 @@ export default function Hero() {
           {/* Section header */}
           <div className="text-center pb-12 md:pb-16">
             <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">
-              Make your website <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">wonderful</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Safe Walk: </span>Your Trusted Companion for Secure Strollswonderful
             </h1>
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">
-                Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+              Welcome to Safe Walk, the ultimate app designed to ensure your safety during your walks. With advanced features and real-time tracking, we've got you covered.
               </p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
@@ -45,9 +45,6 @@ export default function Hero() {
 
                 </div>
                 <div>
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:ml-4 rounded-full py-3 px-6" href="#0">
-                  Learn more
-                </a>
 
 
                 </div>
@@ -61,7 +58,7 @@ export default function Hero() {
             thumbWidth={768}
             thumbHeight={432}
             thumbAlt="Modal video thumbnail"
-            video="/videos/video.mp4"
+            video={Video}
             videoWidth={1920}
             videoHeight={1080}
           />

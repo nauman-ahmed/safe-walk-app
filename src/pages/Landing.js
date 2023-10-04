@@ -17,10 +17,10 @@ const LandingPage = () => {
         <Header />
         {/* {children} */}
         <Hero />
-        <Features />
+        {/* <Features /> */}
         <FeaturesBlocks />
-         <Testimonials />
-        <Newsletter />
+         {/* <Testimonials />
+        <Newsletter /> */}
         <Footer />
       </div>
     </div>
