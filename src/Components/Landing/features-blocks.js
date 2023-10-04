@@ -24,8 +24,8 @@ export default function FeaturesBlocks() {
               {/* Use purple color for the background */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="64"
-                height="64"
+                width="50"
+                height="50"
                 rx="32"
                 viewBox="0 0 100 100"
                 fill="#FF0000"
@@ -39,7 +39,7 @@ export default function FeaturesBlocks() {
 
                 <circle cx="50" cy="75" r="5" fill="#FFF" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+              <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 Real-time Safety Alerts
               </h4>
               <p className="text-gray-600 text-center">
@@ -56,14 +56,14 @@ export default function FeaturesBlocks() {
                 id="Layer_1"
                 data-name="Layer 1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="64"
-                height="64"
+                width="50"
+                height="50"
                 viewBox="0 0 512 512"
               >
                 <title>location-pin-glyph</title>
                 <path d="M256,0C138.37,0,42.67,95.7,42.67,213.33c0,158.93,193.27,289.59,201.5,295.08a21.33,21.33,0,0,0,23.67,0c8.23-5.49,201.5-136.16,201.5-295.08C469.33,95.7,373.63,0,256,0Zm0,106.67A106.67,106.67,0,1,1,149.33,213.33,106.79,106.79,0,0,1,256,106.67ZM192,213.33a64,64,0,1,1,64,64A64.07,64.07,0,0,1,192,213.33Z" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+              <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 GPS Tracking
               </h4>
               <p className="text-gray-600 text-center">
@@ -78,8 +78,8 @@ export default function FeaturesBlocks() {
               {/* Use purple color for the background */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="64"
-                height="64"
+                width="50"
+                height="50"
                 viewBox="0 0 100 100"
                 fill="none"
                 stroke="black"
@@ -97,7 +97,7 @@ export default function FeaturesBlocks() {
                 <line x1="50" y1="55" x2="35" y2="70" />
                 <line x1="50" y1="55" x2="65" y2="70" />
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+              <h4 className="text-xl font-bold leading-snug tracking-tight my-1">
                 Walking History
               </h4>
               <p className="text-gray-600 text-center">

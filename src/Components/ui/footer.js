@@ -21,17 +21,18 @@ export default function Footer() {
               </a>
             </li>
             <li className="ml-4">
-              <a href="#0" className="flex justify-center items-center hover:text-light-green-400 hover:bg-purple-600 rounded-full shadow transition duration-150 ease-in-out" aria-label="Github">
-                <svg className="w-8 h-8 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 8.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6 0.4 0.1 0.5-0.2 0.5-0.4V22c-2.2 0.5-2.7-1-2.7-1-0.4-0.9-0.9-1.2-0.9-1.2-0.7-0.5 0.1-0.5 0.1-0.5 0.8 0.1 1.2 0.8 1.2 0.8 0.7 1.3 1.9 0.9 2.3 0.7 0.1-0.5 0.3-0.9 0.5-1.1-1.8-0.2-3.6-0.9-3.6-4 0-0.9 0.3-1.6 0.8-2.1-0.1-0.2-0.4-1 0.1-2.1 0 0 0.7-0.2 2.2 0.8 0.6-0.2 1.3-0.3 2-0.3s1.4 0.1 2 0.3c1.5-1 2.2-0.8 2.2-0.8 0.4 1.1 0.2 1.9 0.1 2.1 0.5 0.6 0.8 1.3 0.8 2.1 0 3.1-1.9 3.7-3.7 3.9 0.3 0.4 0.6 0.9 0.6 1.6v2.2c0 0.2 0.1 0.5 0.6 0.4 3.2-1.1 5.5-4.1 5.5-7.6-0.1-4.4-3.7-8-8.1-8z" />
+              <a href="#0" className="flex justify-center items-center hover:text-light-green-400 hover:bg-purple-600 rounded-full shadow transition duration-150 ease-in-out" aria-label="Facebook">
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 5c-2.8 0-5 2.2-5 5v3.4H13v4h3v12h5v-12h3.8l0.2-4h-4V10c0-1.2 0.4-2 2-2h2V4h-4z"/>
                 </svg>
               </a>
             </li>
+
             {/* Remove unwanted social icons */}
           </ul>
 
           {/* Copyrights note */}
-          <div className="text-sm text-gray-600">&copy; Your Company Name. All rights reserved.</div>
+          <div className="text-sm text-gray-600">&copy; Safe Walk. All rights reserved.</div>
 
         </div>
 

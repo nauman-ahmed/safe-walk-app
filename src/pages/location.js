@@ -10,6 +10,7 @@ import { getAddressFromLatLong } from "../userServices/service"
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import  Header from "../Components/ui/map"
+import  Footer from "../Components/ui/footer"
 
 function Location() {
 
@@ -303,12 +304,12 @@ function Location() {
               </div>
             </div>
             <div className="commutes-info">
-              <div className="commutes-initial-state" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
+              <div className="commutes-initial-state max-w-6xl mx-auto flex-col sm:flex-row" style={{ display: `${addresses.length > 0 ? 'none' : 'flex'}` }}>
                 <div className="description">
                   <h1 className="heading">find your safe walk home</h1>
                   <p>see travel time, directions, and zones to avoid</p>
                 </div>
-                <button className="add-button" onClick={() => handleAddAddressDialoge()}>
+                <button className="add-button mt-4 self-start sm:self-center sm:mt-0" onClick={() => handleAddAddressDialoge()}>
                   <svg
                     aria-label="Add Icon"
                     width="24px"
@@ -409,7 +410,7 @@ function Location() {
             </div>
           </div>
         </div>
-  
+        <Footer />
       </LoadScript>
     );
   }

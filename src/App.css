@@ -163,6 +163,16 @@ body {
   background-color: var(--black);
 }
 
+@media screen and (max-width:640px) {
+  .commutes-info {
+    position: unset;
+    padding-top: 48px;
+    overflow: unset;
+  }
+  .add-button {
+    align-self: start !important;
+  }
+}
 .commutes-initial-state {
   border-radius: 8px;
   border: 1px solid var(--grey);

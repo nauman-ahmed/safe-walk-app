@@ -4,7 +4,7 @@ import Footer from "../Components/ui/footer";
 import { getUserTrips } from "../API/api";
 import { decodeToken } from "react-jwt";
 import { Link, useNavigate } from "react-router-dom"; // Use Link from react-router-dom for navigation
-
+import TravelingImage from "../images/traveling.png";
 function HistoryPage() {
   const navigate = useNavigate();
   const [historyData, setHistoryData] = useState(null);
@@ -42,13 +42,23 @@ function HistoryPage() {
 
         <div className="bg-black pt-36">
           {/* Hero Section */}
-          <div className=" text-green-500 py-16">
+          <div className="bg-black py-16">
             <div className="max-w-4xl mx-auto px-4 text-center">
-              <h1 className="text-3xl font-semibold mb-4">My Traveling History</h1>
+              <h1 className="text-3xl font-semibold text-green-500 mb-4">
+                My Traveling History
+              </h1>
+              <div className="mb-8">
+                {/* Add your image here */}
+                <img
+                  src={TravelingImage} // Replace with your image URL
+                  alt="Traveling History"
+                  className="w-48 mx-auto rounded-full"
+                />
+              </div>
             </div>
           </div>
           {/* History Table */}
-          <div className="bg-black max-w-4xl mx-auto py-11 px-4 mt-8">
+          <div className="bg-black max-w-4xl mx-auto py-11 px-4 ">
             <table className="w-full border-collapse border border-green-500">
               <thead>
                 <tr className="bg-purple-900">
