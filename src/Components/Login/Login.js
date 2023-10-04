@@ -59,7 +59,7 @@ export default function Login(props) {
         navigate('/map');
       }else{
         console.log("ERROR")
-        toast.error('Please add data to taskName');
+        toast.error('Invalid Credentials');
       }
     })
   };

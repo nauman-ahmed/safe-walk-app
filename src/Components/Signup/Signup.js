@@ -41,11 +41,9 @@ export default function Signup(props) {
         if(res == "Successfully created"){
           toast.success("Successfully created");
           navigate('/');
-          console.log("Successfully created")
         }else{
-          console.log("ERROR")
+          toast.success("Something Went Wrong");
           toast.error("ERROR");
-          alert("ERROR")
 
       }
     })

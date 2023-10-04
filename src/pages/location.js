@@ -10,14 +10,14 @@ import { getAddressFromLatLong } from "../userServices/service"
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import  Header from "../Components/ui/map"
+import { ToastContainer, toast } from 'react-toastify';
 
 function Location() {
 
   const navigate = useNavigate()
   const [originLatLng, setOriginLatLng] = useState({ lat: 0, lng: 0 });
   let myRoute = null;
-  const [name, setName] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  
   const [addresses, setAddressess] = useState([]);
   const [destinationLatLng, setDestinationLatLng] = useState({ lat: 0, lng: 0 });
   const [empty, setEmpty] = useState(false);
@@ -117,17 +117,15 @@ function Location() {
   const sendtextHandler = () => {
     const phoneNumber = localStorage.getItem("mobileNumber");
     sendText({phoneNumber}).then((res)=> {
-      console.log(res)
+      if(res == "Error In Sending Message"){
+        toast.error("Error In Sending Message")
+        return
+      }
+      toast.success("Successfully Sent a Message")
     })
   }
 
-  const handleSubmit = () => {
-    localStorage.setItem("contactName", name);
-    localStorage.setItem("mobileNumber", phoneNumber);
-    setName('');
-    setPhoneNumber('');
-   
-  }
+
 
   const handleAddAddressDialoge = () => {
     setEmpty(true)
@@ -262,6 +260,7 @@ function Location() {
     setAddAddress(false)
     setEmpty(false)
     setAddressess([])
+    toast.success("Successfully End of Trip")
   }
 
   if(!localStorage.getItem("authorization")){
@@ -269,7 +268,7 @@ function Location() {
   }else{
     return (
       <LoadScript googleMapsApiKey="AIzaSyB5uijdNdiYHE6vfZO_aFNb-Lq_pjZxMVA" libraries={["places"]}>
-  
+        <ToastContainer/>
         <div className="App"> 
           {/* <svg className="hide">
             <defs>
@@ -297,7 +296,7 @@ function Location() {
                   <button 
                     className="py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300" 
                     onClick={sendtextHandler}>
-                    Contact
+                    {localStorage.getItem("mobileNumber") ? "Contact  " + localStorage.getItem("mobileNumber") : "Contact" }
                   </button>
                 </div>
               </div>

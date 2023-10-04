@@ -3,11 +3,14 @@ import Logo from './logo'; // Replace with the correct path to your Logo compone
 import MobileMenu from './mobile-menu'; // Replace with the correct path to your MobileMenu component
 import { Link, useNavigate } from 'react-router-dom'; // Use Link from react-router-dom for navigation
 import PreviousMap from 'postcss/lib/previous-map';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Header(props) {
   const [top, setTop] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+  const [name, setName] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+
   const navigate = useNavigate()
 
   const toggleDropdown = () => {
@@ -24,6 +27,20 @@ export default function Header(props) {
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [top]);
+  
+  const handleSubmit = () => {
+    if(name == "" || phoneNumber == ""){
+      toast.error("Please Add Detaisl")
+    }else{
+      console.log("handleSubmit",name,phoneNumber)
+      localStorage.setItem("contactName", name);
+      localStorage.setItem("mobileNumber", phoneNumber);
+  
+      setName('');
+      setPhoneNumber('');
+      toast.success("Succefully Saved Contact")
+    }
+  }
 
   return (
     <header
@@ -31,6 +48,7 @@ export default function Header(props) {
         !top ? 'bg-white backdrop-blur-sm shadow-lg text-gray-800' : ''
       }`}
     >
+      <ToastContainer/>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Site branding */}
@@ -46,6 +64,7 @@ export default function Header(props) {
                 id="exampleContactName"
                 aria-describedby="contactName"
                 placeholder="  name"
+                onChange={(e) => setName(e.target.value)}
               />
 
               <label htmlFor="examplePhoneNumber"></label>
@@ -54,8 +73,9 @@ export default function Header(props) {
                 className="rounded-md appearance-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
                 id="examplePhoneNumber"
                 placeholder="  mobile number"
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
-              <button type="button" className="ml-5 py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300">  submit</button>
+              <button type="button" onClick={handleSubmit} className="ml-5 py-2 px-5 bg-green-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded-lg transition duration-300">  submit</button>
             </form>
           </div>
           {/* Desktop navigation */}
