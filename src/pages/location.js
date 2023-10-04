@@ -28,7 +28,7 @@ function Location() {
   const [addressToState, setAddressToState] = useState(false);
   const [sourceAddress, setSourceAddress] = useState("");
   const [destinationTrips, setDestinationTrips] = useState([]);
-  
+  const [timeoutId, setTimeoutId] = useState(null);
   
   const checkAuth = async () => {
     let flag = false;
@@ -115,7 +115,7 @@ function Location() {
     }
   },[addressToState])
 
-  const sendtextHandler = () => {
+  const sendtextHandler = (text = null) => {
     const phoneNumber = localStorage.getItem("mobileNumber");
     sendText({phoneNumber}).then((res)=> {
       if(res == "Error In Sending Message"){
@@ -126,7 +126,43 @@ function Location() {
     })
   }
 
+  const startTimer = () => {
+    console.log("TIMER HAS BEEN STARTED")
+    if(timeoutId){
+      clearTimer()
+    }
 
+    let temp = []
+
+    addresses.map((add) => temp.push(add.durationValue))
+
+    let sum = 0;
+
+    for (let num of temp){
+
+        sum = sum + num
+    }
+
+    const timerId = setTimeout(() => {
+      sendtextHandler("TIMER")
+    }, sum * 2 * 1000); // 20 minutes in milliseconds
+
+    setTimeoutId(timerId);
+  };
+
+  // Function to clear the timer when directions are completed
+  const clearTimer = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  };
+
+  // Watch for changes in directionsInProgress
+  useEffect(() => {
+    if (addresses.length > 0) {
+      startTimer();
+    } 
+  }, [addresses]);
 
   const handleAddAddressDialoge = () => {
     setEmpty(true)
@@ -187,14 +223,15 @@ function Location() {
 
           if (isEdit) {
             const updateAddresses = addresses;
-            const obj = { direction: myRoute, destinationAddress: destinationAddress, distance: response.rows[0].elements[0].distance.text, duration: response.rows[0].elements[0].duration.text, originLatLng, destinationLatLng }
+            const obj = { direction: myRoute, destinationAddress: destinationAddress, distance: response.rows[0].elements[0].distance.text, duration: response.rows[0].elements[0].duration.text,durationValue: response.rows[0].elements[0].duration.value, originLatLng, destinationLatLng }
             updateAddresses[selectedItem] = obj
             setAddressess(updateAddresses);
             if (addresses && addresses.length > 0) {
               setSelectedItem(addresses.length)
             }
           } else {
-            setAddressess([...addresses, { direction: myRoute, destinationAddress: destinationAddress, distance: response.rows[0].elements[0].distance.text, duration: response.rows[0].elements[0].duration.text, originLatLng, destinationLatLng }])
+            console.log("destinationTripsHandler",response.rows[0])
+            setAddressess([...addresses, { direction: myRoute, destinationAddress: destinationAddress, distance: response.rows[0].elements[0].distance.text, duration: response.rows[0].elements[0].duration.text,durationValue: response.rows[0].elements[0].duration.value, originLatLng, destinationLatLng }])
             if (addresses && addresses.length > 0) {
               setSelectedItem(addresses.length)
             }
@@ -409,7 +446,6 @@ function Location() {
             </div>
           </div>
         </div>
-        <Footer />
       </LoadScript>
     );
   }

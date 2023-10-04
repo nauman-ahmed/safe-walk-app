@@ -25,8 +25,6 @@ function App() {
 
     if(flag){
       setAuthToken(localStorage.getItem("authorization"))
-    }else{
-      toast.error("You Are Not Signed In")
     }
 
   }
@@ -37,7 +35,6 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
